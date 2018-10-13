@@ -1,4 +1,4 @@
-# nuxtjs1
+# Mobx NuxtJS Example
 
 > My ace Nuxt.js project
 
