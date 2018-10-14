@@ -1,6 +1,16 @@
 # Mobx NuxtJS Example
 
-> My ace Nuxt.js project
+> My  Nuxt.js project showing integration of Mobx
+
+![mobx-nuxt-example/assets/readme.image.png](https://github.com/aaronksaunders/mobx-nuxt-example/blob/master/assets/readme.image.png)
+
+## Added Mobx
+
+
+## Added Support for Decorators
+
+## Using Vuetify
+
 
 ## Build Setup
 
