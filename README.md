@@ -1,14 +1,67 @@
 # Mobx NuxtJS Example
 
-> My  Nuxt.js project showing integration of Mobx
+My  Nuxt.js project showing integration of Mobx.
+A simple two tabbed application which renders a filtered list of products, "socks" and "shoes". When clicked they are added to the cart.
+
+The cart is accessed by clicking on the cart button and it lists the items in the cart and the total cost. Items are deleted from the cart by clicking on them
 
 ![mobx-nuxt-example/assets/readme.image.png](https://github.com/aaronksaunders/mobx-nuxt-example/blob/master/assets/readme.image.png)
 
 ## Added Mobx
 
+>MobX is a battle tested, simple and scalable state management library transparently applying functional reactive programming (TFRP). The Mobx design principle is very simple:
+
+>Anything that can be derived from the application state, should be derived. Automatically.
+
+>https://github.com/mobxjs/mobx
+
+```console
+yarn add mobx-vue mobx
+```
+
+Added the `store.js` file to a new folder created called `services`, will need to import the store in the `index.vue` file
+
+```javascript
+  import Vue from 'vue'
+  import { Store } from '../services/store'
+  import { Observer, observer } from 'mobx-vue'
+
+  const store = new Store()
+  Vue.prototype.$store = store
+```  
 
 ## Added Support for Decorators
 
+### Install the appropriate plugins
+
+```console
+yarn add -D  @babel/plugin-proposal-class-properties
+yarn add -D babel-plugin-transform-decorators-legacy
+```
+
+### Update the `nuxt.config.js` file
+```javascript
+  /*
+  ** Build configuration
+  */
+  build: {
+    babel: {
+      plugins: [
+        [
+          '@babel/plugin-proposal-decorators',
+          {
+            legacy: true
+          }
+        ],
+        [
+          '@babel/plugin-proposal-class-properties',
+          {
+            loose: true
+          }
+        ]
+      ]
+    },
+```
 ## Using Vuetify
 
 
