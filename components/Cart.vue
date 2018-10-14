@@ -6,10 +6,10 @@
         :key="product.id"
         avatar
         ripple
-        @click="addToCart(product)"
+        @click="removeFromCart(index)"
       >
         <v-list-tile-content>
-          <v-list-tile-title>{{product.id}} {{product.name}} {{formatter.format(product.price)}}</v-list-tile-title>
+          <v-list-tile-title>{{product.id}} {{product.name}} {{product.price}}</v-list-tile-title>
         </v-list-tile-content>
 
         <v-list-tile-action>
@@ -20,6 +20,12 @@
         :key="index"
       ></v-divider>
     </template>
+    <v-list-tile>
+      <v-list-tile-content>
+        <v-list-tile-title>Total: {{formatter.format($store.cartTotal)}}</v-list-tile-title>
+      </v-list-tile-content>
+    </v-list-tile>
+
   </v-list>
 </template>
 <script>
@@ -30,22 +36,17 @@ export default observer({
   props: ["productType"],
   computed: {
     productsForDisplay: function() {
-      if (this.productType === 1) {
-        this.$store.showProduct("SHOES");
-      } else {
-        this.$store.showProduct("SOCKS");
-      }
-
-      return this.$store.filteredProducts;
+      return this.$store.cartItems;
     }
   },
   methods: {
-    addToCart: function(_item) {
-      this.$store.addItemToCart(_item);
+    removeFromCart: function(_item) {
+      this.$store.removeItemFromCart(_item);
     }
   },
   data() {
     return {
+      msg: "Welcome to Your Vue.js App",
       formatter: new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",

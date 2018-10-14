@@ -63,8 +63,8 @@ export class Store {
   }
   @action
   removeItemFromCart(index) {
-    let r = this.cartItems.splice(index, 1);
-    return r;
+    this.cartItems.splice(index, 1);
+    return this.cartItems;
   }
 
   @action
@@ -95,7 +95,6 @@ export class Store {
     return this._filterByValue(this.products, this.filter);
   }
 
-  
   _filterByValue(products, filter) {
     let result = [];
     products.forEach((v, k) => {

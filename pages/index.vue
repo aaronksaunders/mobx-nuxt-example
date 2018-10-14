@@ -1,37 +1,38 @@
 <template>
   <div>
     <v-toolbar dark color="primary">
-      <v-toolbar-title class="white--text">Title</v-toolbar-title>
+      <v-toolbar-title class="white--text">Mobx Nuxt Vue Sample</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon>
-        Cart
+      <v-btn @click="displayCart = !displayCart" :ripple=true color="secondary">
+        {{displayCart ? 'Back' : 'Cart (' + this.$store.cartItems.length +')'}}
       </v-btn>
     </v-toolbar>
     <v-content>
       <v-container fluid>
-        <v-tabs slot="extension" v-model="tabs" fixed-tabs color="transparent">
-          <v-tabs-slider></v-tabs-slider>
-          <v-tab href="#mobile-tabs-5-1" class="primary--text">
-            <v-icon>phone</v-icon>
-          </v-tab>
+        <template v-if="displayCart">
+          <Cart />
+        </template>
+        <template v-else>
+          <v-tabs slot="extension" v-model="tabs" fixed-tabs color="transparent">
+            <v-tabs-slider></v-tabs-slider>
+            <v-tab href="#mobile-tabs-5-1" class="primary--text">
+              Shoes
+            </v-tab>
 
-          <v-tab href="#mobile-tabs-5-2" class="primary--text">
-            <v-icon>favorite</v-icon>
-          </v-tab>
+            <v-tab href="#mobile-tabs-5-2" class="primary--text">
+              Socks
+            </v-tab>
 
-          <v-tab href="#mobile-tabs-5-3" class="primary--text">
-            <v-icon>account_box</v-icon>
-          </v-tab>
-        </v-tabs>
+          </v-tabs>
 
-        <v-tabs-items v-model="tabs" class="white elevation-1">
-          <v-tab-item v-for="i in 3" :id="'mobile-tabs-5-' + i" :key="i">
-            <v-card>
-              <v-card-text>{{i}}</v-card-text>
-              <ProductCatalogList :product-type=i></ProductCatalogList>
-            </v-card>
-          </v-tab-item>
-        </v-tabs-items>
+          <v-tabs-items v-model="tabs" class="white elevation-1">
+            <v-tab-item v-for="i in 2" :id="'mobile-tabs-5-' + i" :key="i">
+              <v-card>
+                <ProductCatalogList :product-type=i></ProductCatalogList>
+              </v-card>
+            </v-tab-item>
+          </v-tabs-items>
+        </template>
       </v-container>
     </v-content>
   </div>
@@ -40,24 +41,26 @@
 <script>
   import Vue from 'vue'
   import ProductCatalogList from '../components/ProductCatalogList.vue'
+  import Cart from '../components/Cart.vue'
   import { Store } from '../services/store'
   import { Observer, observer } from 'mobx-vue'
 
   const store = new Store()
   Vue.prototype.$store = store
 
-  export default {
+  export default observer({
     name: 'Home',
     components: {
-      ProductCatalogList
+      ProductCatalogList,
+      Cart
     },
     data() {
       return {
-        tabs: {},
-        msg: 'Welcome to Your Vue.js App'
+        tabs: "",
+        displayCart: false
       }
     }
-  }
+  })
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
