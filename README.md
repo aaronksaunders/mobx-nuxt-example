@@ -64,6 +64,40 @@ yarn add -D babel-plugin-transform-decorators-legacy
 ```
 ## Using Vuetify
 
+>Vuetify is developed exactly according to Material Design spec. Every component is hand crafted to bring you the best possible UI tools to your next great app. The development doesn't stop at the core components outlined in Google's spec. Through the support of community members and sponsors, additional components will be designed and made available for everyone to enjoy.
+
+### Configured the plugin to support Vuetify in the file `plugins/vuetify.js`
+```javascript
+// plugins/vuetify.js
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+import colors from 'vuetify/es5/util/colors'
+
+Vue.use(Vuetify, {
+  theme: {
+    primary: "#26A69A",
+    secondary: "#26A69A",
+    accent: "#00796B",
+    error: "#f44336",
+    warning: "#ffeb3b",
+    info: "#2196f3",
+    success: "#004D40"
+  }
+})
+```
+
+#### Setup my `default.vue` in the layouts folder
+
+```html
+<template>
+  <v-app>
+    <nuxt />
+  </v-app>
+</template>
+```
+
+
+https://vuetifyjs.com/en/
 
 ## Build Setup
 
